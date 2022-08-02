@@ -257,8 +257,9 @@ SELECT COUNT(*) AS `__count`
 # NOTE every time you execute this function a duplicate student will be created with a different primary key number
 def problem_five(request):
 
-    new_students = Student.objects.create(first_name='Kyle', last_name='Harwood', year='2022', gpa=3.0)
-    
+    student = Student.objects.create(first_name='Kyle', last_name='Harwood', year='2022', gpa=3.0)
+    print(student)
+
     students = Student.objects.filter(id=11)
 
     for student in students:
@@ -292,14 +293,20 @@ VALUES ('Kyle', 'Harwood', 2022, 3.0)
 
 
 # Query the previoiusly created student by the id and update the "gpa" to a new value
-# Then query the studets table to get that student by their id
+# Then query the students table to get that student by their id
 # Print the new student's id, full name, and gpa to the terminal
 def problem_six(request):
     
     # Make sure to set this equal to the primary key of the row you just created!
+    
     student_id = 11
+    student = Student.objects.filter(pk=student_id).update(gpa=3.5)
+    print(student)
 
+    students = Student.objects.filter(id=11)
 
+    for student in students:
+        print(f'Id: {student.id} Full Name: {student.first_name} {student.last_name} GPA: {student.gpa}')
 
     return complete(request)
 
@@ -347,7 +354,7 @@ def problem_seven(request):
 
     # Make sure to set this equal to the primary key of the row you just created!
     student_id = 11
-
+    student = Student.objects.filter(pk=student_id).delete()
 
     try:
         student = Student.objects.get(pk=student_id)
@@ -405,7 +412,7 @@ SELECT `school_db_student`.`id`,
 # Print out the instructors full name and number of courses to the console
 def bonus_problem(request):
 
-
+    instructors = Instructor.objects.filter()
 
     return complete(request)
 
